@@ -1,1 +1,1 @@
-pub mod hello_world_ctl;
+pub mod hello_world;
