@@ -12,6 +12,7 @@ pub enum AppError {
     IoError(String),
     InternalError(String),
     EnvVarError(VarError),
+    NotFound(String),
 }
 
 impl From<std::io::Error> for AppError {
@@ -26,6 +27,7 @@ impl Display for AppError {
             Self::IoError(e) => e,
             Self::InternalError(e) => e,
             Self::EnvVarError(e) => &e.to_string(),
+            Self::NotFound(e) => e,
         };
         write!(f, "Error: {}", message)
     }
@@ -40,6 +42,7 @@ impl IntoResponse for AppError {
                 StatusCode::INTERNAL_SERVER_ERROR,
                 self.to_string(),
             ),
+            AppError::NotFound(e) => (StatusCode::NOT_FOUND, e.clone()),
         };
 
         let body = Json(json!({ "message": message }));
@@ -50,5 +53,11 @@ impl IntoResponse for AppError {
 impl From<VarError> for AppError {
     fn from(value: VarError) -> Self {
         AppError::EnvVarError(value)
+    }
+}
+
+impl From<sqlx::Error> for AppError {
+    fn from(value: sqlx::Error) -> Self {
+        AppError::InternalError(value.to_string())
     }
 }

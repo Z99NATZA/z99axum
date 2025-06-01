@@ -1,7 +1,7 @@
 mod app;
 mod routes;
 //
-use app::http::core::result::AppResult;
+use app::http::core::{result::AppResult};
 use dotenv::dotenv;
 use std::env;
 
@@ -10,7 +10,6 @@ async fn main() -> AppResult<()> {
     dotenv().ok();
 
     let app = routes::api::api();
-
     let host = env::var("HOST")?;
     let port = env::var("PORT")?;
     let running = format!("{}:{}", host, port);

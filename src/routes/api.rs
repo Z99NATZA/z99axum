@@ -10,5 +10,6 @@ pub fn api() -> Router {
 
     Router::new()
         .merge(super::hello_world::hello_world_routes())
+        .merge(super::users::users_routes())
         .layer(cors)
 }
