@@ -1,12 +1,12 @@
 use axum::Json;
+use axum_macros::debug_handler;
 use serde::Deserialize;
 use serde::Serialize;
 use sqlx::prelude::FromRow;
 use crate::app::http::core::error::AppError;
 use crate::app::http::core::result::AppResult;
-use crate::app::http::config::db;
-use crate::app::http::config::db_create_pool;
-use axum_macros::debug_handler;
+use crate::config::db;
+use crate::config::db_create_pool;
 
 #[derive(Debug, Deserialize)]
 pub struct UserGetRequest {

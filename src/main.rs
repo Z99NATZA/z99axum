@@ -1,23 +1,14 @@
 mod app;
 mod routes;
-//
-use app::http::core::{result::AppResult};
-use dotenv::dotenv;
-use std::env;
+mod bootstrap;
+mod config;
+
+use app::http::core::result::AppResult;
+use bootstrap::app as z99axum;
 
 #[tokio::main]
 async fn main() -> AppResult<()> {
-    dotenv().ok();
-
-    let app = routes::api::api();
-    let host = env::var("HOST")?;
-    let port = env::var("PORT")?;
-    let running = format!("{}:{}", host, port);
-    
-    println!("App runing on {}", running);
-
-    let listener = tokio::net::TcpListener::bind(running).await?;
-    axum::serve(listener, app).await?;
-
+    z99axum::run().await?;
     Ok(())
 }
+ 

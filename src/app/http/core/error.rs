@@ -61,3 +61,4 @@ impl From<sqlx::Error> for AppError {
         AppError::InternalError(value.to_string())
     }
 }
+
