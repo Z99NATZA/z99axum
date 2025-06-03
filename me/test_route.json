@@ -1,0 +1,19 @@
+[
+    {
+        "route": "localhost:3030/api/users/user-get-one/1"
+    },
+    {
+        "route": "localhost:3030/api/users/user-get-config",
+        "body": {
+            "id": 2,
+            "db_config": {
+                "db_type": "Postgres",
+                "host": "localhost",
+                "port": 5432,
+                "database": "z99axum",
+                "username": "postgres",
+                "password": "password"
+            }
+        }
+    }
+]
