@@ -1,7 +1,10 @@
-use axum::{routing::post, Router};
-use crate::app::http::controllers::users;
+use std::sync::Arc;
 
-pub fn users_routes() -> Router {
+use axum::{routing::{get, post}, Router};
+use crate::app::http::{controllers::users, core::app_state::AppState};
+
+pub fn users_routes() -> Router<Arc<AppState>> {
     Router::new()
-        .route("/api/users/user-get", post(users::user_get))
+        .route("/api/users/user-get-config", post(users::user_get))
+        .route("/api/users/user-get-one/{id}", get(users::user_get2))
 }

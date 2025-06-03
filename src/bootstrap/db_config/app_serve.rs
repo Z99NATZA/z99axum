@@ -1,5 +1,4 @@
 use axum::Router;
-
 use crate::app::http::core::result::AppResult;
 
 pub async fn run(addr: String, router: Router) -> AppResult<()> {

@@ -1,7 +1,9 @@
-use axum::{routing::get, Router};
-use crate::app::http::controllers::hello_world;
+use std::sync::Arc;
 
-pub fn hello_world_routes() -> Router {
+use axum::{routing::get, Router};
+use crate::app::http::{controllers::hello_world, core::app_state::AppState};
+
+pub fn hello_world_routes() -> Router<Arc<AppState>> {
     Router::new()
         .route("/hello-world", get(hello_world::get_hello_world))
 }

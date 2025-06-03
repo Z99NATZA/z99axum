@@ -4,7 +4,7 @@ use sqlx::{
 };
 use crate::app::http::core::result::AppResult;
 
-use super::db::{DbConfig, DbPool, DbType};
+use super::db_config::{DbConfig, DbPool, DbType};
 
 pub async fn create_pool(config: DbConfig) -> AppResult<DbPool> {
 
